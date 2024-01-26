@@ -15,7 +15,6 @@ def test_form_student_registration():
     browser.element('#userNumber').should(be.blank).type('1234567890')
 
     # Указать дату рождения
-
     browser.element('#dateOfBirthInput').click()
     browser.element('.react-datepicker__month-select').click()
     browser.element('.react-datepicker__month-select').click().element(by.text('May')).click()
@@ -24,7 +23,6 @@ def test_form_student_registration():
     browser.element('.react-datepicker__day--022').click()
 
     # Выбрать предметы
-
     browser.element('#subjectsInput').type('Computer')
     browser.element(by.text('Computer Science')).click()
     browser.element('#subjectsInput').type('Physics').press_enter()
@@ -41,13 +39,12 @@ def test_form_student_registration():
 
     # Выбрать местожительство
     browser.element('#currentAddress').should(be.blank).type('Мой адрес — ни дом и не улица')
-
     browser.element('#state').click().element(by.text('Haryana')).click()
     browser.element('#city').click().element(by.text('Panipat')).click()
+
+    # Проверить, что формы правильно заполнены
     browser.element('#submit').click()
-
     browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-
     browser.element('.table').all('td:nth-child(2)').should(
         have.texts('Nikolay Titenok', 'ntitenok@gmail.com', 'Male', '1234567890', '22 May,1989',
                    'Computer Science, Physics', 'Sports, Reading, Music', 'myfile', 'Мой адрес — ни дом и не улица',
